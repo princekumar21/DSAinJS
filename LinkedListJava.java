@@ -11,7 +11,7 @@ public class LinkedListJava {
     }
 
     static Node convertArrToLL(int[] arr) {
-        if(arr == null || arr.length == 0){
+        if (arr == null || arr.length == 0) {
             return null;
         }
         Node head = new Node(arr[0]);
@@ -92,14 +92,30 @@ public class LinkedListJava {
         return temp;
     }
 
+    static Node InsertAtTailOfLL(Node head, int val) {
+        Node temp = new Node(val);
+        if (head == null) {
+            temp.next = null;
+            return temp;
+        }
+        Node newHead = head;
+        while (newHead.next != null) {
+            newHead = newHead.next;
+        }
+        newHead.next = temp;
+        temp.next = null;
+        return head;
+    }
+
     public static void main(String[] args) {
-        int[] arr = {};
+        int[] arr = { 30, 85, 75 };
         Node head = convertArrToLL(arr);
         // Node newHead = DeleteHeadOfLL(head);
         // Node newHead = deleteTailOfLL(head);
         // Node newHead = DeleteKElement(head, 2);
         // Node newHead = DeleteElementWithValue(head, 4);
-        Node newHead = InsertAtHeadOfLL(head, 20);
+        // Node newHead = InsertAtHeadOfLL(head, 20);
+        Node newHead = InsertAtTailOfLL(head, 20);
         Node temp = newHead;
         while (temp != null) {
             System.out.print(" - " + temp.data);
