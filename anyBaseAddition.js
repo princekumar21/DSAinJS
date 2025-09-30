@@ -40,4 +40,4 @@ function anyBaseAddition(num1, num2, base) {
 
 }
 
-console.log(anyBaseAddition(767, 421, 8))
+console.log(anyBaseAddition(1521, 8981, 2))
