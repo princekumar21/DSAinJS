@@ -29,10 +29,22 @@ public class DoublyLinkedList {
         return head;
     }
 
+    static Node DeleteHeadOfDLL(Node head){
+        if(head == null) return null;
+        if(head.next == null) return null;
+
+        Node temp = head;
+        temp = temp.next;
+        temp.prev = null;
+
+        return temp;
+    }
+
     public static void main(String[] args) {
         int[] arr = { 8, 4, 6 };
         Node head = convertArrayToDLL(arr);
-        Node temp = head;
+        Node newHead = DeleteHeadOfDLL(head);
+        Node temp = newHead;
         while (temp != null) {
             if (temp.prev == null)
                 System.out.print(temp.prev + "  <-  " + temp.data);
