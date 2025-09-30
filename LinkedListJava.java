@@ -107,6 +107,30 @@ public class LinkedListJava {
         return head;
     }
 
+    static Node InsertAtKPosition(Node head, int val, int k) {
+        if (head == null)
+            return head;
+
+        Node temp = new Node(val);
+        Node newHead = head;
+        if (k == 1) {
+            temp.next = head;
+            return temp;
+        }
+
+        int counter = 1;
+        Node mover = null;
+
+        while (counter != k && newHead.next != null) {
+            mover = newHead;
+            newHead = newHead.next;
+            counter += 1;
+        }
+        mover.next = temp;
+        temp.next = newHead;
+        return head;
+    }
+
     public static void main(String[] args) {
         int[] arr = { 30, 85, 75 };
         Node head = convertArrToLL(arr);
@@ -115,7 +139,8 @@ public class LinkedListJava {
         // Node newHead = DeleteKElement(head, 2);
         // Node newHead = DeleteElementWithValue(head, 4);
         // Node newHead = InsertAtHeadOfLL(head, 20);
-        Node newHead = InsertAtTailOfLL(head, 20);
+        // Node newHead = InsertAtTailOfLL(head, 20);
+        Node newHead = InsertAtKPosition(head, 29, 2);
         Node temp = newHead;
         while (temp != null) {
             System.out.print(" - " + temp.data);
