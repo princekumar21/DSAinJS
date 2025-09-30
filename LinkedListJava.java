@@ -131,8 +131,29 @@ public class LinkedListJava {
         return head;
     }
 
+    static Node InsertBeforeValue(Node head, int val, int data) {
+        if (head == null)
+            return head;
+
+        Node temp = new Node(val);
+        Node newHead = head;
+        if (data == head.data) {
+            temp.next = head;
+            return temp;
+        }
+
+        Node mover = null;
+        while (newHead.data != data && newHead.next != null) {
+            mover = newHead;
+            newHead = newHead.next;
+        }
+        mover.next = temp;
+        temp.next = newHead;
+        return head;
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 30, 85, 75 };
+        int[] arr = {8, 7, 9, 6};
         Node head = convertArrToLL(arr);
         // Node newHead = DeleteHeadOfLL(head);
         // Node newHead = deleteTailOfLL(head);
@@ -140,7 +161,8 @@ public class LinkedListJava {
         // Node newHead = DeleteElementWithValue(head, 4);
         // Node newHead = InsertAtHeadOfLL(head, 20);
         // Node newHead = InsertAtTailOfLL(head, 20);
-        Node newHead = InsertAtKPosition(head, 29, 2);
+        // Node newHead = InsertAtKPosition(head, 29, 2);
+        Node newHead = InsertBeforeValue(head, 3, 6);
         Node temp = newHead;
         while (temp != null) {
             System.out.print(" - " + temp.data);
