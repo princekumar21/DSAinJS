@@ -29,9 +29,11 @@ public class DoublyLinkedList {
         return head;
     }
 
-    static Node DeleteHeadOfDLL(Node head){
-        if(head == null) return null;
-        if(head.next == null) return null;
+    static Node DeleteHeadOfDLL(Node head) {
+        if (head == null)
+            return null;
+        if (head.next == null)
+            return null;
 
         Node temp = head;
         temp = temp.next;
@@ -40,10 +42,71 @@ public class DoublyLinkedList {
         return temp;
     }
 
+    static Node DeleteTailOfDLL(Node head) {
+        if (head == null || head.next == null)
+            return null;
+
+        Node temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        temp.next = null;
+        return head;
+    }
+
+    static Node DeleteKElement(Node head, int k) {
+        if (head == null)
+            return null;
+
+        Node temp = head;
+        if (k == 1) {
+            temp = temp.next;
+            temp.prev = null;
+            return temp;
+        }
+
+        Node mover = null;
+        int counter = 1;
+
+        while (counter != k && temp.next != null) {
+            mover = temp;
+            temp = temp.next;
+            counter += 1;
+        }
+
+        if (k > counter) {
+            return head;
+        }
+
+        Node temporary = temp.next;
+        mover.next = temporary;
+        if (temp.next != null) {
+            temporary.prev = mover;
+        }
+
+        return head;
+
+    }
+
+    static Node insertNodeBeforeHead(Node head, int val) {
+        Node newNode = new Node(val);
+        Node temp = head;
+        if (head == null) {
+            return newNode;
+        }
+        temp.prev = newNode;
+        newNode.next = temp;
+
+        return newNode;
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 8, 4, 6 };
+        int[] arr = { 8, 4, 6, 9, 3 };
         Node head = convertArrayToDLL(arr);
-        Node newHead = DeleteHeadOfDLL(head);
+        // Node newHead = DeleteHeadOfDLL(head);
+        // Node newHead = DeleteTailOfDLL(head);
+        // Node newHead = DeleteKElement(head, 5);
+        Node newHead = insertNodeBeforeHead(head, 5);
         Node temp = newHead;
         while (temp != null) {
             if (temp.prev == null)
