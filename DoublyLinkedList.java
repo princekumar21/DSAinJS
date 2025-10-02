@@ -127,14 +127,44 @@ public class DoublyLinkedList {
         return head;
     }
 
+    static Node insertBeforeKthElement(Node head, int val, int k) {
+        Node newNode = new Node(val);
+        if (head == null)
+            return head;
+        if (k == 1) {
+            return insertNodeBeforeHead(head, val);
+        }
+        Node temp = head;
+        int counter = 1;
+
+        while (counter != k && temp.next != null) {
+            temp = temp.next;
+            counter += 1;
+        }
+
+        if (k > counter) {
+            return head;
+        }
+
+        Node newTemporary = temp.prev;
+        temp.prev = newTemporary.next = newNode;
+        newNode.next = temp;
+        newNode.prev = newTemporary;
+
+        return head;
+    }
+
+    // javac DoublyLinkedList.java
+    // java DoublyLinkedList
     public static void main(String[] args) {
-        int[] arr = { 8 };
+        int[] arr = { 8, 5, 7, 9 };
         Node head = convertArrayToDLL(arr);
         // Node newHead = DeleteHeadOfDLL(head);
         // Node newHead = DeleteTailOfDLL(head);
         // Node newHead = DeleteKElement(head, 5);
         // Node newHead = insertNodeBeforeHead(head, 5);
-        Node newHead = insertNodeBeforeTail(head, 5);
+        // Node newHead = insertNodeBeforeTail(head, 5);
+        Node newHead = insertBeforeKthElement(head, 6, 1);
         Node temp = newHead;
         while (temp != null) {
             if (temp.prev == null)
