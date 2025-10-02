@@ -100,13 +100,41 @@ public class DoublyLinkedList {
         return newNode;
     }
 
+    static Node insertNodeBeforeTail(Node head, int val) {
+        Node newNode = new Node(val);
+        Node temp = head;
+
+        if (head == null) {
+            return newNode;
+        }
+
+        if (temp.next == null) {
+            temp.prev = newNode;
+            newNode.next = temp;
+            return newNode;
+        }
+
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        Node newTemp = temp.prev;
+        temp.prev = newNode;
+        newNode.next = temp;
+        newTemp.next = newNode;
+        newNode.prev = newTemp;
+
+        return head;
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 8, 4, 6, 9, 3 };
+        int[] arr = { 8 };
         Node head = convertArrayToDLL(arr);
         // Node newHead = DeleteHeadOfDLL(head);
         // Node newHead = DeleteTailOfDLL(head);
         // Node newHead = DeleteKElement(head, 5);
-        Node newHead = insertNodeBeforeHead(head, 5);
+        // Node newHead = insertNodeBeforeHead(head, 5);
+        Node newHead = insertNodeBeforeTail(head, 5);
         Node temp = newHead;
         while (temp != null) {
             if (temp.prev == null)
