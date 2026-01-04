@@ -10,7 +10,7 @@ function removeDuplicate(nums) {
         }
         j++;
     }
-    return i + 1;
+    return nums;
 }
 
 console.log(removeDuplicate([1, 1, 2, 3, 3, 4, 5, 5,]));
